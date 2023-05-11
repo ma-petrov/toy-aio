@@ -15,6 +15,28 @@ class Task:
 
 
 class Loop:
+    """Event loop
+
+    Example
+    >>> def func1():
+    ...     for i in range(5):
+    ...         yield print(f'step {i}')
+    ...     return 'stop'
+    >>> def func2():
+    ...     for i in range(10, 13):
+    ...         yield print(f'jump {i}')
+    ...     return 'stop'
+    >>> print(Loop([func1(), func2(),]).run())
+    step 0
+    jump 10
+    step 1
+    jump 11
+    step 2
+    jump 12
+    step 3
+    step 4
+    ['stop', 'stop']
+    """
     def __init__(self, tasks: Generator | List[Generator]) -> None:
         if isinstance(tasks, Generator):
             tasks = [tasks]
